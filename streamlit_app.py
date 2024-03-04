@@ -6,6 +6,7 @@ with st.sidebar:
   replicate_api_token = st.text_input("Replicate API Token", type="password")
   option = st.selectbox("Select Model", [
     "Text: Meta Llama 2 70B",
+    "Text: Google Gemma 7B Instruct",
     "Text: Mixtral 8x7B Instruct",
     "Image: Stable Diffusion XL", 
     "Code: Meta Code Llama 70B Instruct", 
@@ -34,6 +35,21 @@ if st.button("Generate"):
                   "system_prompt": "You are a helpful, respectful and honest assistant. Always answer as helpfully as possible, while being safe. Your answers should not include any harmful, unethical, racist, sexist, toxic, dangerous, or illegal content. Please ensure that your responses are socially unbiased and positive in nature.\n\nIf a question does not make any sense, or is not factually coherent, explain why instead of answering something not correct. If you don't know the answer to a question, please don't share false information.",
                   "max_new_tokens": 500,
                   "min_new_tokens": -1
+              },
+          )
+          st.success(''.join(output))
+        elif option == "Text: Google Gemma 7B Instruct":
+          # Run google-deepmind/gemma-7b-it model on Replicate
+          output = replicate.run(
+              "google-deepmind/gemma-7b-it:2790a695e5dcae15506138cc4718d1106d0d475e6dca4b1d43f42414647993d5",
+              input={
+                  "top_k": 50,
+                  "top_p": 0.95,
+                  "prompt": prompt,
+                  "temperature": 0.7,
+                  "max_new_tokens": 512,
+                  "min_new_tokens": -1,
+                  "repetition_penalty": 1
               },
           )
           st.success(''.join(output))
