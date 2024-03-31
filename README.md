@@ -1,5 +1,7 @@
 # replicate
-[Replicate](https://replicate.com) is a platform for hosting and running machine learning (ML) models with a cloud API, without having to manage your own infrastructure. This repository showcases a simple Streamlit app for running the following open-source text, code, image, and music generation models on Replicate:
+[Replicate](https://replicate.com) is a platform for hosting and running machine learning (ML) models with a cloud API, without having to manage your own infrastructure. Sign up for an account at Replicate and get an API token, which you'll need for this project.
+
+This repository showcases a simple Streamlit app for running the following open-source text, code, image, and music generation models on Replicate:
 * Text: Meta Llama 2 70B
 * Text: Google Gemma 7B Instruct
 * Text: Mixtral 8x7B Instruct
