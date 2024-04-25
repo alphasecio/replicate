@@ -1,2 +1,2 @@
-streamlit==1.31.1
+streamlit==1.32.2
 replicate==0.24.0
