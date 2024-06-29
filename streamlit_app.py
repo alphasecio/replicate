@@ -10,6 +10,7 @@ with st.sidebar:
     "Text: Mixtral 8x7B Instruct",
     "Image: Stable Diffusion 3", 
     "Code: Meta Code Llama 70B Instruct", 
+    "Audio: Suno AI Bark",
     "Music: Meta MusicGen"]
     )
 
@@ -97,10 +98,23 @@ if st.button("Generate"):
               }
           )
           st.success(''.join(output))
+        elif option == "Audio: Suno AI Bark":
+          # Run suno-ai/bark model on Replicate
+          output = replicate.run(
+              "suno-ai/bark:b76242b40d67c76ab6742e987628a2a9ac019e11d56ab96c4e91ce03b79b2787",
+              input={
+                  "prompt": prompt,
+                  "text_temp": 0.7,
+                  "output_full": False,
+                  "waveform_temp": 0.7,
+                  "history_prompt": "announcer"
+              }
+          )
+          st.audio(output.get('audio_out'), format="audio/wav")
         elif option == "Music: Meta MusicGen":
           # Run meta/musicgen model on Replicate
           output = replicate.run(
-              "meta/musicgen:b05b1dff1d8c6dc63d14b0cdb42135378dcb87f6373b0d3d341ede46e59e2b38",
+              "meta/musicgen:671ac645ce5e552cc63a54a2bbff63fcf798043055d2dac5fc9e36a837eedcfb",
               input={
                   "top_k": 250,
                   "top_p": 0,
@@ -109,13 +123,13 @@ if st.button("Generate"):
                   "temperature": 1,
                   "continuation": False,
                   "model_version": "stereo-large",
-                  "output_format": "wav",
+                  "output_format": "mp3",
                   "continuation_start": 0,
                   "multi_band_diffusion": False,
                   "normalization_strategy": "peak",
                   "classifier_free_guidance": 3
               }
           )
-          st.audio(output, format="audio/wav")
+          st.audio(output, format="audio/mp3")
     except Exception as e:
       st.exception(f"Exception: {e}")
