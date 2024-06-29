@@ -5,10 +5,10 @@ st.subheader("Replicate Playground")
 with st.sidebar:
   replicate_api_token = st.text_input("Replicate API Token", type="password")
   option = st.selectbox("Select Model", [
-    "Text: Meta Llama 2 70B",
+    "Text: Meta Llama 3 70B Instruct",
     "Text: Google Gemma 7B Instruct",
     "Text: Mixtral 8x7B Instruct",
-    "Image: Stable Diffusion XL", 
+    "Image: Stable Diffusion 3", 
     "Code: Meta Code Llama 70B Instruct", 
     "Music: Meta MusicGen"]
     )
@@ -23,15 +23,16 @@ if st.button("Generate"):
   else:
     try:
       with st.spinner("Please wait..."):
-        if option == "Text: Meta Llama 2 70B":
-          # Run meta/llama-2-70b-chat model on Replicate
+        if option == "Text: Meta Llama 3 70B Instruct":
+          # Run meta/meta-llama-3-70b-instruct model on Replicate
           output = replicate.run(
-              "meta/llama-2-70b-chat",
+              "meta/meta-llama-3-70b-instruct",
               input={
                   "debug": False,
-                  "top_p": 1,
+                  "top_k": 0,
+                  "top_p": 0.9,
                   "prompt": prompt,
-                  "temperature": 0.5,
+                  "temperature": 0.6,
                   "system_prompt": "You are a helpful, respectful and honest assistant. Always answer as helpfully as possible, while being safe. Your answers should not include any harmful, unethical, racist, sexist, toxic, dangerous, or illegal content. Please ensure that your responses are socially unbiased and positive in nature.\n\nIf a question does not make any sense, or is not factually coherent, explain why instead of answering something not correct. If you don't know the answer to a question, please don't share false information.",
                   "max_new_tokens": 500,
                   "min_new_tokens": -1
@@ -69,12 +70,15 @@ if st.button("Generate"):
               },
           )
           st.success(''.join(output))
-        elif option == "Image: Stable Diffusion XL":
-          # Run stability-ai/stable-diffusion image model on Replicate
+        elif option == "Image: Stable Diffusion 3":
+          # Run stability-ai/stable-diffusion-3 image model on Replicate
           output = replicate.run(
-            "stability-ai/sdxl:39ed52f2a78e934b3ba6e2a89f5b1c712de7dfea535525255b1aa35c5565e08b", 
-            input={"prompt": prompt}
-            )
+            "stability-ai/stable-diffusion-3", 
+            input={
+              "prompt": prompt,
+              "aspect_ratio": "3:2"
+            }
+          )
           st.image(output)
         elif option == "Code: Meta Code Llama 70B Instruct":
           # Run meta/codellama-70b-instruct model on Replicate
