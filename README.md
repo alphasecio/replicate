@@ -3,6 +3,7 @@
 
 This repository showcases a simple Streamlit app for running the following open-source text, code, image, audio, and music generation models on Replicate:
 * Text: Meta Llama 3 70B Instruct
+* Text: Meta Llama 3.1 405B Instruct
 * Text: Google Gemma 7B Instruct
 * Text: Mixtral 8x7B Instruct
 * Image: Stable Diffusion 3
