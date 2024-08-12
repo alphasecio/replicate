@@ -10,6 +10,7 @@ with st.sidebar:
     "Text: Google Gemma 7B Instruct",
     "Text: Mixtral 8x7B Instruct",
     "Image: Stable Diffusion 3", 
+    "Image: Black Forest Labs Flux Schnell", 
     "Code: Meta Code Llama 70B Instruct", 
     "Audio: Suno AI Bark",
     "Music: Meta MusicGen"]
@@ -92,6 +93,16 @@ if st.button("Generate"):
           # Run stability-ai/stable-diffusion-3 image model on Replicate
           output = replicate.run(
             "stability-ai/stable-diffusion-3", 
+            input={
+              "prompt": prompt,
+              "aspect_ratio": "3:2"
+            }
+          )
+          st.image(output)
+        elif option == "Image: Black Forest Labs Flux Schnell":
+          # Run black-forest-labs/flux-schnell image model on Replicate
+          output = replicate.run(
+            "black-forest-labs/flux-schnell", 
             input={
               "prompt": prompt,
               "aspect_ratio": "3:2"
