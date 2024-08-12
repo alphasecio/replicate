@@ -7,6 +7,7 @@ This repository showcases a simple Streamlit app for running the following open-
 * Text: Google Gemma 7B Instruct
 * Text: Mixtral 8x7B Instruct
 * Image: Stable Diffusion 3
+* Image: Black Forest Labs Flux Schnell
 * Code: Meta Code Llama 70B Instruct
 * Audio: Suno AI Bark
 * Music: Meta MusicGen
