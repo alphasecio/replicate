@@ -8,7 +8,7 @@ with st.sidebar:
     "Text: Meta Llama 3 70B Instruct",
     "Text: Meta Llama 3.1 405B Instruct",
     "Text: Google Gemma 7B Instruct",
-    "Text: Mixtral 8x7B Instruct",
+    "Text: Mistral 7B",
     "Image: Stable Diffusion 3", 
     "Image: Black Forest Labs Flux Schnell", 
     "Code: Meta Code Llama 70B Instruct", 
@@ -73,10 +73,10 @@ if st.button("Generate"):
               },
           )
           st.success(''.join(output))
-        elif option == "Text: Mixtral 8x7B Instruct":
-          # Run mistralai/mixtral-8x7b-instruct-v0.1 model on Replicate
+        elif option == "Text: Mistral 7B":
+          # Run mistralai/mistral-7b-v0.1 model on Replicate
           output = replicate.run(
-              "mistralai/mixtral-8x7b-instruct-v0.1",
+              "mistralai/mistral-7b-v0.1",
               input={
                   "top_k": 50,
                   "top_p": 0.9,
