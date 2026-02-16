@@ -1,32 +1,41 @@
-import os, replicate, streamlit as st
+import os
+import replicate
+import streamlit as st
 
-# Streamlit app
-st.subheader("Replicate Playground")
+# Streamlit app config
+st.set_page_config(page_title="Replicate Studio", page_icon="🚀", layout="centered")
+
 with st.sidebar:
-  replicate_api_token = st.text_input("Replicate API Token", type="password")
-  option = st.selectbox("Select Model", [
-    "Text: Meta Llama 3 70B Instruct",
-    "Text: Meta Llama 3.1 405B Instruct",
-    "Text: Google Gemma 7B Instruct",
-    "Text: Mistral 7B",
-    "Image: Stable Diffusion 3", 
-    "Image: Black Forest Labs Flux Schnell", 
-    "Code: Meta Code Llama 70B Instruct", 
-    "Audio: Suno AI Bark",
-    "Music: Meta MusicGen"]
+  st.title("🚀 Replicate Studio")
+  with st.expander("⚙️ Settings", expanded=True):
+    replicate_api_token = st.text_input("Replicate API token", type="password", help="Get your token [here](https://replicate.com)")
+    option = st.radio("Serverless model", [
+      "📝 Meta Llama 3 70B Instruct",
+      "📝 Meta Llama 3.1 405B Instruct",
+      "📝 Google Gemma 7B Instruct",
+      "📝 Mistral 7B",
+      "📷 Stable Diffusion 3",
+      "📷 Black Forest Labs Flux Schnell",
+      "💻 Meta Code Llama 70B Instruct",
+      "🎙️ Suno AI Bark",
+      "🎵 Meta MusicGen"
+      ]
     )
 
 os.environ["REPLICATE_API_TOKEN"] = replicate_api_token
-prompt = st.text_input("Prompt", label_visibility="collapsed")
+
+col1, col2 = st.columns([4, 1])
+prompt = col1.text_input("Prompt", label_visibility="collapsed")
+submit = col2.button("Submit")
 
 # If Generate button is clicked
-if st.button("Generate"):
+if submit:
   if not replicate_api_token.strip() or not prompt.strip():
     st.error("Please provide the missing fields.")
   else:
     try:
       with st.spinner("Please wait..."):
-        if option == "Text: Meta Llama 3 70B Instruct":
+        if option == "📝 Meta Llama 3 70B Instruct":
           # Run meta/meta-llama-3-70b-instruct model on Replicate
           output = replicate.run(
               "meta/meta-llama-3-70b-instruct",
@@ -42,7 +51,7 @@ if st.button("Generate"):
               },
           )
           st.success(''.join(output))
-        elif option == "Text: Meta Llama 3.1 405B Instruct":
+        elif option == "📝 Meta Llama 3.1 405B Instruct":
           # Run meta/meta-llama-3.1-405b-instruct model on Replicate
           output = replicate.run(
               "meta/meta-llama-3.1-405b-instruct",
@@ -58,7 +67,7 @@ if st.button("Generate"):
               },
           )
           st.success(''.join(output))
-        elif option == "Text: Google Gemma 7B Instruct":
+        elif option == "📝 Google Gemma 7B Instruct":
           # Run google-deepmind/gemma-7b-it model on Replicate
           output = replicate.run(
               "google-deepmind/gemma-7b-it:2790a695e5dcae15506138cc4718d1106d0d475e6dca4b1d43f42414647993d5",
@@ -73,7 +82,7 @@ if st.button("Generate"):
               },
           )
           st.success(''.join(output))
-        elif option == "Text: Mistral 7B":
+        elif option == "📝 Mistral 7B":
           # Run mistralai/mistral-7b-v0.1 model on Replicate
           output = replicate.run(
               "mistralai/mistral-7b-v0.1",
@@ -89,7 +98,7 @@ if st.button("Generate"):
               },
           )
           st.success(''.join(output))
-        elif option == "Image: Stable Diffusion 3":
+        elif option == "📷 Stable Diffusion 3":
           # Run stability-ai/stable-diffusion-3 image model on Replicate
           output = replicate.run(
             "stability-ai/stable-diffusion-3", 
@@ -99,7 +108,7 @@ if st.button("Generate"):
             }
           )
           st.image(output)
-        elif option == "Image: Black Forest Labs Flux Schnell":
+        elif option == "📷 Black Forest Labs Flux Schnell":
           # Run black-forest-labs/flux-schnell image model on Replicate
           output = replicate.run(
             "black-forest-labs/flux-schnell", 
@@ -109,7 +118,7 @@ if st.button("Generate"):
             }
           )
           st.image(output)
-        elif option == "Code: Meta Code Llama 70B Instruct":
+        elif option == "💻 Meta Code Llama 70B Instruct":
           # Run meta/codellama-70b-instruct model on Replicate
           output = replicate.run(
               "meta/codellama-70b-instruct:a279116fe47a0f65701a8817188601e2fe8f4b9e04a518789655ea7b995851bf",
@@ -126,7 +135,7 @@ if st.button("Generate"):
               }
           )
           st.success(''.join(output))
-        elif option == "Audio: Suno AI Bark":
+        elif option == "🎙️ Suno AI Bark":
           # Run suno-ai/bark model on Replicate
           output = replicate.run(
               "suno-ai/bark:b76242b40d67c76ab6742e987628a2a9ac019e11d56ab96c4e91ce03b79b2787",
@@ -139,7 +148,7 @@ if st.button("Generate"):
               }
           )
           st.audio(output.get('audio_out'), format="audio/wav")
-        elif option == "Music: Meta MusicGen":
+        elif option == "🎵 Meta MusicGen":
           # Run meta/musicgen model on Replicate
           output = replicate.run(
               "meta/musicgen:671ac645ce5e552cc63a54a2bbff63fcf798043055d2dac5fc9e36a837eedcfb",
