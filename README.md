@@ -1,16 +1,16 @@
-# replicate
+# Replicate Studio
 [Replicate](https://replicate.com) is a platform for hosting and running machine learning (ML) models with a cloud API, without having to manage your own infrastructure. Sign up for an account at Replicate and get an API token, which you'll need for this project.
 
 This repository showcases a simple Streamlit app for running the following open-source text, code, image, audio, and music generation models on Replicate:
-* Text: Meta Llama 3 70B Instruct
-* Text: Meta Llama 3.1 405B Instruct
-* Text: Google Gemma 7B Instruct
-* Text: Mixtral 8x7B Instruct
-* Image: Stable Diffusion 3
-* Image: Black Forest Labs Flux Schnell
-* Code: Meta Code Llama 70B Instruct
-* Audio: Suno AI Bark
-* Music: Meta MusicGen
+* 📝 Meta Llama 3 70B Instruct
+* 📝 Meta Llama 3.1 405B Instruct
+* 📝 Google Gemma 7B Instruct
+* 📝 Mixtral 8x7B Instruct
+* 📷 Stable Diffusion 3
+* 📷 Black Forest Labs Flux Schnell
+* 💻 Meta Code Llama 70B Instruct
+* 🎙️ Suno AI Bark
+* 🎵 Meta MusicGen
 
 ![replicate-sdxl](./replicate-sdxl.png)
 
